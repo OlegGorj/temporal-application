@@ -1,0 +1,6 @@
+appcode_onboard:
+  workflow_name: ""
+  task_queue: ""
+  namespace: "default"
+  task_timeout: 60
+  

@@ -3,12 +3,15 @@
 This is a simple application that uses the temporal.io SDK to demonstrate how to use Temporal to orchestrate a workflow.
 Intention of this application is to demonstarte how to use Temporal to orchestrate a workflow that involves multiple steps and how to handle failures in the workflow.
 
+## What is this application about?
+
 Initial version of this application is a simple workflow that involves 3 steps:
+
 1. Call API endpoint `/request` to receive and validate a request from a client, it returns a request id along with callback url.
 2. API endpoint calls a service to process the request and return a response. Service is Temporal worker that is listening to a task queue.
 3. Service creates main long running Temporal workflow that orchestrates the chail workfllows to process long running tasks.
 4. Main workflow creates child workflows to process the long running tasks. Each child workflow is responsible for processing a single task.
-5. Eacg child workflow performs the task and returns the result to the main workflow.
+5. Each child workflow performs the task and returns the result to the main workflow.
 6. Another API endpoint `<request id>/status` resposnible for fetching overall status of the workflow, which includes status of each child workflow.
 
 ## API Endpoints:
