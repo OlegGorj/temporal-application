@@ -56,6 +56,21 @@ curl -X GET http://localhost:8080/<request_id>/status
 go test ./...
 ```
 
+## Running the application locally
+
+Setup virtual environment:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+
+
 ## How to run the application in Docker:
 
 1. Build the Docker image:
