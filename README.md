@@ -1,4 +1,4 @@
-# Simaple temporal-based application
+# Example of Temporal-based application
 
 This is a simple application that uses the temporal.io SDK to demonstrate how to use Temporal to orchestrate a workflow.
 Intention of this application is to demonstarte how to use Temporal to orchestrate a workflow that involves multiple steps and how to handle failures in the workflow.
