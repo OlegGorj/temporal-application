@@ -1,0 +1,29 @@
+name: Azure CI pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "*" ]
+
+  workflow_dispatch:
+
+jobs:
+
+  azure_login:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: azure/login@v2
+      env:
+        AZURE_LOGIN_PRE_CLEANUP: true
+        AZURE_LOGIN_POST_CLEANUP: true
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        enable-AzPSSession: true
+
+    - name: Azure CLI script
+      uses: azure/cli@v2
+      with:
+        azcliversion: latest
+        inlineScript: |
+          az account show
