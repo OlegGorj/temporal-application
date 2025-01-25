@@ -8,7 +8,6 @@ on:
 
   workflow_dispatch:
 
-
 jobs:
   azure_login:
     runs-on: ubuntu-latest
