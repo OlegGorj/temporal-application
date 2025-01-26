@@ -12,8 +12,10 @@ jobs:
 
   azure_login:
     runs-on: ubuntu-24.04
+    environment: engineering
     steps:
     - name: Azure Login
+      id: azure_login
       uses: azure/login@v2
       env:
         AZURE_LOGIN_PRE_CLEANUP: true
@@ -23,6 +25,7 @@ jobs:
         enable-AzPSSession: true
 
     - name: Azure CLI script
+      id: azure_cli_script
       uses: azure/cli@v2
       with:
         azcliversion: latest
@@ -30,8 +33,22 @@ jobs:
           az account show
           az group list --output table
 
+    - name: Set output variables
+      id: set_outputs
+      run: |
+        echo "azcliversion=$(az version --output tsv --query \"azure-cli\")" >> $GITHUB_OUTPUT
+        echo "account=$(az account show --query \"user.name\" -o tsv)" >> $GITHUB_OUTPUT
+        echo "subscription=$(az account show --query \"name\" -o tsv)" >> $GITHUB_OUTPUT
+
+    outputs:
+      AZURE_CLI_VERSION: ${{ steps.azure_cli_script.outputs.azcliversion }}
+      AZURE_CURRENT_ACCOUNT: ${{ steps.azure_cli_script.outputs.account }}
+      AZURE_CURRENT_SUBSCRIPTION: ${{ steps.azure_cli_script.outputs.subscription }}
+  
   debug:
     runs-on: ubuntu-24.04
+    environment: engineering
+    needs: azure_login
     steps:
     # steps to run custom scripts
     - name: Run a multi-line script
@@ -40,7 +57,7 @@ jobs:
         echo ::notice title=Set the Octocat variable::export OCTOCAT="🐙"
         echo "::debug:: Value of GITHUB_API_URL is $GITHUB_API_URL"
         echo "::debug:: Value of GITHUB_GRAPHQL_URL is $GITHUB_GRAPHQL_URL"
-        
+
 
 
 
