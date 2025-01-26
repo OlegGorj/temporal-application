@@ -1,0 +1,19 @@
+name: 'Azure Login'
+description: 'Login to Azure with a service principal'
+run-name: 'Azure Login'
+
+inputs:
+  azure-credentials:
+    description: 'Azure Credentials'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: azure/login@v2
+      env:
+        AZURE_LOGIN_PRE_CLEANUP: true
+        AZURE_LOGIN_POST_CLEANUP: true
+      with:
+        creds: ${{ inputs.azure-credentials }}
+        enable-AzPSSession: true
