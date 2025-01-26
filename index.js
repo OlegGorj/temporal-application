@@ -15,9 +15,12 @@ module.exports = {
   }
 };
 
+// filepath: index.js
 function main() {
-    console.log("Application started");
+  console.log('Application started');
 }
 
 main();
+
+module.exports = { main };
 
