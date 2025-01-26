@@ -1,11 +1,10 @@
 [![Build and Deploy](https://github.com/oleggorj/temporal-application/actions/workflows/azure-ci-pipeline.yml/badge.svg)](https://github.com/oleggorj/temporal-application/actions/workflows/azure-ci-pipeline.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/oleggorj/temporal-application)](https://goreportcard.com/report/github.com/oleggorj/temporal-application)
-[![codecov](https://codecov.io/gh/oleggorj/temporal-application/branch/main/graph/badge.svg?token=QZQZQZQZQZ)](https://codecov.io/gh/oleggorj/temporal-application)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![PyPI version](https://badge.fury.io/py/temporalio.svg)](https://badge.fury.io/py/temporalio)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-
 # Example of Temporal-based application
-
 
 This is a simple application that uses the temporal.io SDK to demonstrate how to use Temporal to orchestrate a workflow.
 Intention of this application is to demonstarte how to use Temporal to orchestrate a workflow that involves multiple steps and how to handle failures in the workflow.
@@ -35,7 +34,7 @@ docker-compose up
 
 2. Start the Temporal worker:
 ```bash
-go run worker/main.go
+python worker/main.py
 ```
 
 3. Start the Temporal web UI:
@@ -45,7 +44,7 @@ docker run --rm -d -p 8088:8088 --network=host --name temporal-web temporalio/we
 
 4. Start the application:
 ```bash
-go run main.go
+python main.py
 ```
 
 5. Use the following curl commands to interact with the application:
@@ -60,7 +59,7 @@ curl -X GET http://localhost:8080/<request_id>/status
 ## How to run the tests:
 
 ```bash
-go test ./...
+pytest
 ```
 
 ## Running the application locally
@@ -75,8 +74,6 @@ Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-
-
 
 ## How to run the application in Docker:
 
