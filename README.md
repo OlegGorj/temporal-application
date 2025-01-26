@@ -1,7 +1,11 @@
+[![Build and Deploy](https://github.com/oleggorj/temporal-application/actions/workflows/azure-ci-pipeline.yml/badge.svg)](https://github.com/oleggorj/temporal-application/actions/workflows/azure-ci-pipeline.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/oleggorj/temporal-application)](https://goreportcard.com/report/github.com/oleggorj/temporal-application)
+[![codecov](https://codecov.io/gh/oleggorj/temporal-application/branch/main/graph/badge.svg?token=QZQZQZQZQZ)](https://codecov.io/gh/oleggorj/temporal-application)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 # Example of Temporal-based application
 
-![CI workflow](https://github.com/oleggorj/temporal-application/.github/workflows/azure-ci-pipeline.yml/badge.svg)
-[![Build and Deploy](https://github.com/oleggorj/temporal-application/actions/workflows/azure-ci-pipeline.yml/badge.svg)](https://github.com/oleggorj/temporal-application/actions/workflows/azure-ci-pipeline.yml)
 
 This is a simple application that uses the temporal.io SDK to demonstrate how to use Temporal to orchestrate a workflow.
 Intention of this application is to demonstarte how to use Temporal to orchestrate a workflow that involves multiple steps and how to handle failures in the workflow.
