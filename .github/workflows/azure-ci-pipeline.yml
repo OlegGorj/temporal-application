@@ -32,7 +32,7 @@ jobs:
     - name: Run a multi-line script
       run: |
         echo "::debug::Set the Octocat variable as an environment variable"
-        ::notice title=Set the Octocat variable::export OCTOCAT="🐙"
+        echo ::notice title=Set the Octocat variable::export OCTOCAT="🐙"
 
 
 
