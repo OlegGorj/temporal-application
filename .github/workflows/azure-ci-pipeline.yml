@@ -39,7 +39,7 @@ jobs:
         echo "azcliversion=$(az version --output tsv --query \"azure-cli\")" >> $GITHUB_OUTPUT
         echo "account=$(az account show --query \"user.name\" -o tsv)" >> $GITHUB_OUTPUT
         echo "subscription=$(az account show --query \"name\" -o tsv)" >> $GITHUB_OUTPUT
-        echo "::debug::CLI version is $(az version --output tsv --query \"azure-cli\")"
+        echo "::debug::CLI version is ${{ steps.azure_cli_script.outputs.azcliversion }}"
 
     outputs:
       AZURE_CLI_VERSION: ${{ steps.azure_cli_script.outputs.azcliversion }}
