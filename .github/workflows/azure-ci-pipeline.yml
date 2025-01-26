@@ -42,13 +42,14 @@ jobs:
           account_info=$(az account show)
           echo "SUBSCRIPTION_ID=$(echo $account_info | jq -r .id)" >> $GITHUB_OUTPUT
           echo "TENANT_ID=$(echo $account_info | jq -r .tenantId)" >> $GITHUB_OUTPUT
-          echo "USER_NAME=$(echo $account_info | jq -r .user.name)" >> $GITHUB_OUTPUT
+          echo "AZ_CLI_VERSION=$(az --version)" >> $GITHUB_OUTPUT
       env:
         AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Debug step
       run: |
         echo "::debug::SUBSCRIPTION_ID is ${{ steps.azure-account.outputs.SUBSCRIPTION_ID }}"
+        echo "::debug::AZ_CLI_VERSION is ${{ steps.azure-account.outputs.AZ_CLI_VERSION }}"
   
     # - name: Set output variables
     #   id: set_outputs
@@ -59,9 +60,7 @@ jobs:
     #     echo "::debug::CLI version is ${{ steps.azure_cli_script.outputs.azcliversion }}"
 
     outputs:
-      AZURE_CLI_VERSION: ${{ steps.azure_cli_script.outputs.azcliversion }}
-      AZURE_CURRENT_ACCOUNT: ${{ steps.azure_cli_script.outputs.account }}
-      AZURE_CURRENT_SUBSCRIPTION: ${{ steps.azure_cli_script.outputs.subscription }}
+      AZURE_CLI_VERSION: ${{ steps.azure-account.outputs.AZ_CLI_VERSION }}
   
   debug:
     runs-on: ubuntu-24.04
