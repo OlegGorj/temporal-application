@@ -24,7 +24,16 @@ jobs:
             cache: 'npm'
                 
         - name: Install dependencies
-          run: npm ci
+          run: |
+            if [ -f "package-lock.json" ]; then
+              echo "Installing dependencies with npm ci..."
+              npm ci || npm ci || npm ci
+            else
+              echo "No package-lock.json found, using npm install..."
+              npm install
+            fi
+          env:
+            NODE_OPTIONS: "--max-old-space-size=4096"
             
         - name: Run linting
           run: npm run lint
