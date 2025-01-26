@@ -42,7 +42,7 @@ jobs:
           account_info=$(az account show)
           echo "SUBSCRIPTION_ID=$(echo $account_info | jq -r .id)" >> $GITHUB_OUTPUT
           echo "TENANT_ID=$(echo $account_info | jq -r .tenantId)" >> $GITHUB_OUTPUT
-          echo "AZ_CLI_VERSION=$(az --version)" >> $GITHUB_OUTPUT
+          echo "AZ_CLI_VERSION=$(az version --output=json | jq -r .azure-cli)" >> $GITHUB_OUTPUT
       env:
         AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
