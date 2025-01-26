@@ -1,4 +1,4 @@
-const { main } = require('../index.js');
+const { main } = require('../src/index.js');
 
 describe('main function', () => {
   let consoleLogSpy;
@@ -22,27 +22,19 @@ describe('main function', () => {
 });
 
 module.exports = {
-  'env': {
-    'node': true,
-    'es2021': true,
-    'jest': true
+  env: {
+    node: true,
+    es2021: true,
+    jest: true
   },
-  'extends': 'eslint:recommended',
-  'parserOptions': {
-    'ecmaVersion': 'latest',
-    'sourceType': 'module'
+  extends: 'eslint:recommended',
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module'
   },
-  'rules': {
-    'indent': ['error', 2],
-    'semi': ['error', 'always'],
-    'quotes': ['error', 'single']
-  },
-  'globals': {
-    'describe': 'readonly',
-    'test': 'readonly',
-    'expect': 'readonly',
-    'beforeEach': 'readonly',
-    'afterEach': 'readonly',
-    'jest': 'readonly'
+  rules: {
+    indent: ['error', 2],
+    semi: ['error', 'always'],
+    quotes: ['error', 'single']
   }
 };
