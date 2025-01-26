@@ -46,7 +46,7 @@ jobs:
           az_version=$(az version --output=json)
           echo "SUBSCRIPTION_ID=$(echo $account_info | jq -r .id)" >> $GITHUB_OUTPUT
           echo "TENANT_ID=$(echo $account_info | jq -r .tenantId)" >> $GITHUB_OUTPUT
-          echo "AZ_CLI_VERSION=$(echo $az_version | jq -r \".[\"azure-cli\"]\")" >> $GITHUB_OUTPUT
+          echo "AZ_CLI_VERSION=$(echo $az_version | jq -r .[\"azure-cli\"])" >> $GITHUB_OUTPUT
 
     - name: Debug step
       run: |
