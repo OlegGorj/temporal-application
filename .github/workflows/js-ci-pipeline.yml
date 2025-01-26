@@ -48,7 +48,10 @@ jobs:
         
         - name: Run linting
           if: success()
-          run: npm run lint
+          run: |
+            echo "Running linter..."
+            npm init @eslint/config-eslint --yes
+            npm run lint
             
         - name: Run tests
           if: success()
