@@ -36,23 +36,35 @@ jobs:
           if: success()
           timeout-minutes: 10
           run: |
-            if [ -f "package.json" ]; then
-              echo "Installing dependencies..."
-              npm install || (echo "First attempt failed" && npm install) || (echo "Second attempt failed" && npm install)
-            else
-              echo "Error: package.json not found"
-              exit 1
-            fi
+            npm install eslint --save-dev
+            npm install
           env:
             NODE_OPTIONS: "--max-old-space-size=4096"
+        
+        - name: Initialize ESLint
+          run: |
+            echo "Creating ESLint config..."
+            cat > .eslintrc.yml << EOF
+            env:
+              node: true
+              es2021: true
+            extends:
+              - 'eslint:recommended'
+            parserOptions:
+              ecmaVersion: 2021
+              sourceType: module
+            rules:
+              indent: ['error', 2]
+              quotes: ['error', 'single']
+              semi: ['error', 'always']
+            EOF
         
         - name: Run linting
           if: success()
           run: |
             echo "Running linter..."
-            npm init @eslint/config
-            npm run lint
-            
+            ./node_modules/.bin/eslint . --ext .js || exit 1
+        
         - name: Run tests
           if: success()
           run: npm test
