@@ -11,7 +11,7 @@ on:
 jobs:
 
   azure_login:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - uses: azure/login@v2
       env:
@@ -27,3 +27,13 @@ jobs:
         azcliversion: latest
         inlineScript: |
           az account show
+    
+    # steps to run custom scripts
+    - name: Run a multi-line script
+      run: |
+        echo "::debug::Set the Octocat variable as an environment variable"
+        ::notice title=Set the Octocat variable::export OCTOCAT="🐙"
+
+
+
+      
