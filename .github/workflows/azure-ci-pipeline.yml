@@ -33,13 +33,30 @@ jobs:
           az account show
           az group list --output table
 
-    - name: Set output variables
-      id: set_outputs
+    - name: Azure CLI Account Info
+      uses: azure/cli@v2
+      id: azure-account
+      with:
+        azcliversion: latest
+        inlineScript: |
+          account_info=$(az account show)
+          echo "SUBSCRIPTION_ID=$(echo $account_info | jq -r .id)" >> $GITHUB_OUTPUT
+          echo "TENANT_ID=$(echo $account_info | jq -r .tenantId)" >> $GITHUB_OUTPUT
+          echo "USER_NAME=$(echo $account_info | jq -r .user.name)" >> $GITHUB_OUTPUT
+      env:
+        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Debug step
       run: |
-        echo "azcliversion=$(az version --output tsv --query \"azure-cli\")" >> $GITHUB_OUTPUT
-        echo "account=$(az account show --query \"user.name\" -o tsv)" >> $GITHUB_OUTPUT
-        echo "subscription=$(az account show --query \"name\" -o tsv)" >> $GITHUB_OUTPUT
-        echo "::debug::CLI version is ${{ steps.azure_cli_script.outputs.azcliversion }}"
+        echo "::debug::SUBSCRIPTION_ID is ${{ steps.azure-account.outputs.SUBSCRIPTION_ID }}"
+  
+    # - name: Set output variables
+    #   id: set_outputs
+    #   run: |
+    #     echo "azcliversion=$(az version --output tsv --query \"azure-cli\")" >> $GITHUB_OUTPUT
+    #     echo "account=$(az account show --query \"user.name\" -o tsv)" >> $GITHUB_OUTPUT
+    #     echo "subscription=$(az account show --query \"name\" -o tsv)" >> $GITHUB_OUTPUT
+    #     echo "::debug::CLI version is ${{ steps.azure_cli_script.outputs.azcliversion }}"
 
     outputs:
       AZURE_CLI_VERSION: ${{ steps.azure_cli_script.outputs.azcliversion }}
