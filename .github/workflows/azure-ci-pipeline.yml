@@ -36,15 +36,16 @@ jobs:
     - name: Azure CLI Account Info
       uses: azure/cli@v2
       id: azure-account
+      env:
+        ACTIONS_STEP_DEBUG: true
+        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       with:
         azcliversion: latest
         inlineScript: |
           account_info=$(az account show)
           echo "SUBSCRIPTION_ID=$(echo $account_info | jq -r .id)" >> $GITHUB_OUTPUT
           echo "TENANT_ID=$(echo $account_info | jq -r .tenantId)" >> $GITHUB_OUTPUT
-          echo "AZ_CLI_VERSION=$(az version --output=json | jq -r .azure-cli)" >> $GITHUB_OUTPUT
-      env:
-        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+          echo 'AZ_CLI_VERSION=$(az version --output=json | jq -r ".[\"azure-cli\"]")' >> $GITHUB_OUTPUT
 
     - name: Debug step
       run: |
