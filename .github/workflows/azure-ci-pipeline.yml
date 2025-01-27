@@ -13,6 +13,11 @@ on:
         description: 'Environment Stage'
         required: true
         default: 'engineering'
+        type: choice
+        options:
+          - 'engineering'
+          - 'staging'
+          - 'production'
 
 jobs:
   azure_login:
