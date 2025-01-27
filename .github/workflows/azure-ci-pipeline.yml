@@ -55,6 +55,11 @@ jobs:
         echo "::debug:: github.actor_id is ${{ github.actor_id }}"
         echo "::debug:: graphql_url is ${{ github.graphql_url }}"
   
+    - name: View context attributes
+      uses: actions/github-script@v7
+      with:
+        script: console.log(context)
+  
     outputs:
       AZURE_CLI_VERSION: ${{ steps.azure-account.outputs.AZ_CLI_VERSION }}
       SUBSCRIPTION_ID: ${{ steps.azure-account.outputs.SUBSCRIPTION_ID }}
@@ -69,8 +74,8 @@ jobs:
       run: |
         echo "::debug::Set the Octocat variable as an environment variable"
         echo ::notice title=Set the Octocat variable::export OCTOCAT="🐙"
-        echo "::debug:: Value of GITHUB_API_URL is $GITHUB_API_URL"
-        echo "::debug:: CLI version is ${{ needs.azure_login.outputs.AZURE_CLI_VERSION }}"
+        echo "::notice:: Value of graphql_url is ${{ github.graphql_url }}"
+        echo "::notice:: CLI version is ${{ needs.azure_login.outputs.AZURE_CLI_VERSION }}"
 
 
 
