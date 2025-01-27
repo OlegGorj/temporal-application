@@ -73,7 +73,6 @@ jobs:
     - name: Run a multi-line script
       run: |
         echo "::debug::Set the Octocat variable as an environment variable"
-        echo ::notice title=Set the Octocat variable::export OCTOCAT="🐙"
         echo "::notice:: Value of graphql_url is ${{ github.graphql_url }}"
         echo "::notice:: CLI version is ${{ needs.azure_login.outputs.AZURE_CLI_VERSION }}"
 
