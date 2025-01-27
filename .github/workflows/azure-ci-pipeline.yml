@@ -50,8 +50,10 @@ jobs:
 
     - name: Debug step
       run: |
-        echo "::debug::SUBSCRIPTION_ID is ${{ steps.azure-account.outputs.SUBSCRIPTION_ID }}"
-        echo "::debug::AZ_CLI_VERSION is ${{ steps.azure-account.outputs.AZ_CLI_VERSION }}"
+        echo "::debug:: SUBSCRIPTION_ID is ${{ steps.azure-account.outputs.SUBSCRIPTION_ID }}"
+        echo "::debug:: AZ_CLI_VERSION is ${{ steps.azure-account.outputs.AZ_CLI_VERSION }}"
+        echo "::debug:: github.event is ${{ github.event }}"
+        echo "::debug:: GITHUB_API_URL is ${{ env.GITHUB_API_URL }}"
   
     # - name: Set output variables
     #   id: set_outputs
@@ -75,7 +77,7 @@ jobs:
         echo "::debug::Set the Octocat variable as an environment variable"
         echo ::notice title=Set the Octocat variable::export OCTOCAT="🐙"
         echo "::debug:: Value of GITHUB_API_URL is $GITHUB_API_URL"
-        echo "::debug:: Value of GITHUB_GRAPHQL_URL is $GITHUB_GRAPHQL_URL"
+        echo "::debug:: Value of GITHUB_GRAPHQL_URL is ${{ env.GITHUB_GRAPHQL_URL }}"
         echo "::debug:: CLI version is ${{ needs.azure_login.outputs.AZURE_CLI_VERSION }}"
 
 
