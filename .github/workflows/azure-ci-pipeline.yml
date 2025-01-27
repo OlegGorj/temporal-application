@@ -9,7 +9,7 @@ on:
 
   workflow_dispatch:
     inputs:
-      ENVIRONMENT stage:
+      ENVIRONMENT_STAGE:
         description: 'Environment Stage'
         required: true
         default: 'engineering'
@@ -85,7 +85,7 @@ jobs:
         echo "::debug::Set the Octocat variable as an environment variable"
         echo "::notice:: Value of graphql_url is ${{ github.graphql_url }}"
         echo "::notice:: CLI version is ${{ needs.azure_login.outputs.AZURE_CLI_VERSION }}"
-        echo "::notice:: ENVIRONMENT_STAGE set as ${{ vars.ENVIRONMENT_STAGE }}"
+        echo "::notice:: var ENVIRONMENT_STAGE set as ${{ vars.ENVIRONMENT_STAGE }}"
         echo "::notice:: input ENVIRONMENT stage set as ${{ inputs.ENVIRONMENT_STAGE }}"
         echo "::notice:: GITHUB_REPOSITORY set as $GITHUB_REPOSITORY"
 
