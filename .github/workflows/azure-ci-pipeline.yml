@@ -88,6 +88,7 @@ jobs:
         echo "::notice:: var ENVIRONMENT_STAGE set as ${{ vars.ENVIRONMENT_STAGE }}"
         echo "::notice:: input ENVIRONMENT stage set as ${{ inputs.ENVIRONMENT_STAGE }}"
         echo "::notice:: GITHUB_REPOSITORY set as $GITHUB_REPOSITORY"
+        echo "::notice:: GITHUB_ACTIONS set as $GITHUB_ACTIONS"
 
   test:
     runs-on: ubuntu-24.04
