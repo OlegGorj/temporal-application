@@ -3,7 +3,7 @@ run-name: Azure CI pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "*" ]
   pull_request:
     branches: [ "*" ]
 
@@ -26,7 +26,7 @@ jobs:
 
     - name: Azure CLI script
       id: azure_cli_script
-      uses: azure/cli@v2
+      uses: azure/cli
       with:
         azcliversion: latest
         inlineScript: |
@@ -55,16 +55,9 @@ jobs:
         echo "::debug:: github.actor_id is ${{ github.actor_id }}"
         echo "::debug:: graphql_url is ${{ github.graphql_url }}"
   
-    # - name: Set output variables
-    #   id: set_outputs
-    #   run: |
-    #     echo "azcliversion=$(az version --output tsv --query \"azure-cli\")" >> $GITHUB_OUTPUT
-    #     echo "account=$(az account show --query \"user.name\" -o tsv)" >> $GITHUB_OUTPUT
-    #     echo "subscription=$(az account show --query \"name\" -o tsv)" >> $GITHUB_OUTPUT
-    #     echo "::debug::CLI version is ${{ steps.azure_cli_script.outputs.azcliversion }}"
-
     outputs:
       AZURE_CLI_VERSION: ${{ steps.azure-account.outputs.AZ_CLI_VERSION }}
+      SUBSCRIPTION_ID: ${{ steps.azure-account.outputs.SUBSCRIPTION_ID }}
   
   debug:
     runs-on: ubuntu-24.04
