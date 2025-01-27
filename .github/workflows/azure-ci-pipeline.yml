@@ -9,7 +9,7 @@ on:
 
   workflow_dispatch:
 
-    
+
 jobs:
   azure_login:
     runs-on: ubuntu-24.04
@@ -76,6 +76,7 @@ jobs:
         echo "::debug::Set the Octocat variable as an environment variable"
         echo "::notice:: Value of graphql_url is ${{ github.graphql_url }}"
         echo "::notice:: CLI version is ${{ needs.azure_login.outputs.AZURE_CLI_VERSION }}"
+        echo "::notice:: ENVIRONMENT_STAGE set as ${{ vars.ENVIRONMENT_STAGE }}"
 
   test:
     runs-on: ubuntu-24.04
