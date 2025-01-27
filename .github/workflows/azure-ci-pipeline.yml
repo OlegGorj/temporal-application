@@ -9,7 +9,7 @@ on:
 
   workflow_dispatch:
     inputs:
-      ENVIRONMENT_STAGE:
+      ENVIRONMENT stage:
         description: 'Environment Stage'
         required: true
         default: 'engineering'
