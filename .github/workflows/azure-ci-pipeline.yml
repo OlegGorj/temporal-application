@@ -26,7 +26,7 @@ jobs:
 
     - name: Azure CLI script
       id: azure_cli_script
-      uses: azure/cli
+      uses: azure/cli@v2
       with:
         azcliversion: latest
         inlineScript: |
