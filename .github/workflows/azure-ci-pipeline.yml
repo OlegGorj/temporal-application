@@ -9,10 +9,11 @@ on:
 
   workflow_dispatch:
 
+    
 jobs:
   azure_login:
     runs-on: ubuntu-24.04
-    environment: engineering
+    environment: ${{ vars.ENVIRONMENT_STAGE }}
     steps:
     - name: Azure Login
       id: azure_login
@@ -76,6 +77,13 @@ jobs:
         echo "::notice:: Value of graphql_url is ${{ github.graphql_url }}"
         echo "::notice:: CLI version is ${{ needs.azure_login.outputs.AZURE_CLI_VERSION }}"
 
+  test:
+    runs-on: ubuntu-24.04
+    environment: engineering
+    needs: azure_login
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v2
 
 
 

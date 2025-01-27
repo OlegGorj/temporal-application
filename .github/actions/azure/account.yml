@@ -1,0 +1,24 @@
+name: 'Azure Account'
+description: 'Azure Account Information'
+run-name: 'Azure Account Information'
+
+inputs:
+  azure-credentials:
+    description: 'Azure Credentials'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: azure/cli@v2
+      id: azure-account
+      env:
+        AZURE_CREDENTIALS: ${{ inputs.azure-credentials }}
+      with:
+        azcliversion: latest
+        inlineScript: |
+          account_info=$(az account show)
+          az_version=$(az version --output=json)
+          echo "SUBSCRIPTION_ID=$(echo $account_info | jq -r .id)" >> $GITHUB_OUTPUT
+          echo "TENANT_ID=$(echo $account_info | jq -r .tenantId)" >> $GITHUB_OUTPUT
+          echo "AZ_CLI_VERSION=$(echo $az_version | jq -r .[\"azure-cli\"])" >> $GITHUB_OUTPUT
