@@ -8,7 +8,11 @@ on:
     branches: [ "*" ]
 
   workflow_dispatch:
-
+    inputs:
+      ENVIRONMENT_STAGE:
+        description: 'Environment Stage'
+        required: true
+        default: 'engineering'
 
 jobs:
   azure_login:
@@ -49,7 +53,7 @@ jobs:
           echo "TENANT_ID=$(echo $account_info | jq -r .tenantId)" >> $GITHUB_OUTPUT
           echo "AZ_CLI_VERSION=$(echo $az_version | jq -r .[\"azure-cli\"])" >> $GITHUB_OUTPUT
 
-    - name: Debug step
+    - name: Info step
       run: |
         echo "::debug:: SUBSCRIPTION_ID is ${{ steps.azure-account.outputs.SUBSCRIPTION_ID }}"
         echo "::debug:: AZ_CLI_VERSION is ${{ steps.azure-account.outputs.AZ_CLI_VERSION }}"
