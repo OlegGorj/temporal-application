@@ -1,5 +1,5 @@
 name: 'Azure Login'
-description: 'Login to Azure with a service principal'
+description: 'Login to Azure with Credentials'
 run-name: 'Azure Login'
 
 inputs:
