@@ -1,6 +1,5 @@
 name: Azure CI pipeline
 run-name: Azure CI pipeline
-
 on:
   push:
     branches: [ "*" ]
